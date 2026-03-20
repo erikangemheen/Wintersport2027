@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ski Vakantie Februari 2027</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--snow:#f4f6fa;--ice:#e8eef7;--alpine:#1a3a5c;--peak:#0d2137;--glacier:#2d6fa3;--melt:#5ba4d4;--green:#2e7d32;--green-bg:#e8f5e9;--orange:#e65100;--orange-bg:#fff3e0;--red:#c62828;--red-bg:#ffebee;--gold:#c9a84c}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--snow);color:var(--peak)}
+
+.hero{background:linear-gradient(160deg,var(--peak) 0%,var(--alpine) 55%,var(--glacier) 100%);padding:64px 24px 72px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 120%,rgba(91,164,212,.18) 0%,transparent 70%)}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80'%3E%3Cpath fill='%23f4f6fa' d='M0,80 L0,60 L120,20 L240,50 L360,10 L480,45 L600,5 L720,40 L840,8 L960,42 L1080,12 L1200,48 L1320,18 L1440,55 L1440,80 Z'/%3E%3C/svg%3E") no-repeat bottom/cover}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--melt);margin-bottom:14px;position:relative}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,7vw,68px);font-weight:900;color:#fff;line-height:1.05;margin-bottom:8px;position:relative}
+.hero h1 span{color:var(--gold)}
+.hero-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.65);margin-bottom:36px;position:relative}
+.hero-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;position:relative}
+.stat{text-align:center}
+.stat-num{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--gold);display:block;line-height:1}
+.stat-lbl{font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px;display:block}
+
+.criteria-bar{background:var(--alpine);padding:18px 24px}
+.criteria-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.criteria-label{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--melt);margin-right:6px}
+.chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.85);font-size:12px;padding:4px 11px;border-radius:20px;white-space:nowrap}
+
+.legend-bar{background:#fff;border-bottom:1px solid var(--ice);padding:12px 24px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.07)}
+.legend-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.legend-title{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#aaa}
+.badge{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500}
+.dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+.dot-green{background:var(--green)}.dot-orange{background:var(--orange)}.dot-red{background:var(--red)}
+.filter-row{display:flex;gap:8px;margin-left:auto}
+.filter-btn{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;border:1.5px solid var(--ice);background:#fff;color:#777;padding:4px 13px;border-radius:20px;cursor:pointer;transition:all .2s}
+.filter-btn.active,.filter-btn:hover{border-color:var(--glacier);color:var(--glacier);background:var(--ice)}
+
+.main{max-width:1100px;margin:0 auto;padding:44px 24px 80px}
+.section-header{display:flex;align-items:center;gap:12px;margin:44px 0 18px}
+.section-header:first-child{margin-top:0}
+.section-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+.section-title{font-family:'Playfair Display',serif;font-size:21px;font-weight:700}
+.section-count{font-size:12px;font-weight:600;letter-spacing:1px;padding:3px 10px;border-radius:12px}
+.count-green{background:var(--green-bg);color:var(--green)}.count-orange{background:var(--orange-bg);color:var(--orange)}.count-red{background:var(--red-bg);color:var(--red)}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+.card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s;border-top:4px solid transparent}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.10)}
+.card.green{border-top-color:var(--green)}.card.orange{border-top-color:var(--orange)}.card.red{border-top-color:var(--red)}
+.card-head{padding:18px 20px 0}
+.card-location{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.green .card-location{color:var(--green)}.orange .card-location{color:var(--orange)}.red .card-location{color:#aaa}
+.card-name{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--peak);margin-bottom:4px;line-height:1.2}
+.card-name a{color:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.card-name a:hover{color:var(--glacier)}
+.card-name a .ext{font-size:12px;opacity:.45}
+.card-region{font-size:12px;color:#888;margin-bottom:12px}
+.card-divider{height:1px;background:var(--ice);margin:0 20px}
+.card-body{padding:13px 20px 18px}
+.card-ski{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.ski-tag{font-size:11px;font-weight:500;background:var(--ice);color:var(--glacier);border-radius:6px;padding:3px 8px;white-space:nowrap}
+.criteria-icons{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:12px}
+.crit-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#555}
+.crit-icon{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.crit-yes{background:var(--green-bg);color:var(--green)}.crit-no{background:var(--red-bg);color:var(--red)}.crit-unk{background:var(--orange-bg);color:var(--orange)}
+.card-note{font-size:12px;color:#666;line-height:1.5;background:var(--snow);border-radius:7px;padding:9px 11px;border-left:3px solid var(--ice);margin-bottom:11px}
+.green .card-note{border-left-color:#a5d6a7}.orange .card-note{border-left-color:#ffcc80}.red .card-note{border-left-color:#ef9a9a}
+.card-price{display:flex;justify-content:space-between;align-items:center}
+.price-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#bbb}
+.price-value{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--peak)}
+.price-sub{font-family:'DM Sans',sans-serif;font-size:11px;color:#aaa;font-weight:400}
+
+.card.star{grid-column:1/-1;background:linear-gradient(135deg,var(--peak) 0%,var(--alpine) 100%);border-top:0;display:grid;grid-template-columns:1fr 1fr;gap:0}
+@media(max-width:620px){.card.star{grid-template-columns:1fr}}
+.star .card-head{padding:26px 28px 18px}
+.star .card-location{color:var(--gold)}.star .card-name{color:#fff;font-size:26px}
+.star .card-name a{color:#fff}.star .card-name a:hover{color:var(--gold)}.star .card-name a .ext{color:rgba(255,255,255,.35)}
+.star .card-region{color:rgba(255,255,255,.55)}.star .card-divider{background:rgba(255,255,255,.1);margin:0 28px}
+.star .card-body{padding:18px 28px 28px}
+.star .card-note{background:rgba(255,255,255,.08);border-left-color:var(--gold);color:rgba(255,255,255,.82)}
+.star .price-label{color:rgba(255,255,255,.4)}.star .price-value{color:var(--gold);font-size:22px}.star .price-sub{color:rgba(255,255,255,.4)}
+.star .ski-tag{background:rgba(255,255,255,.12);color:rgba(255,255,255,.78)}.star .crit-item{color:rgba(255,255,255,.78)}
+.star-pill{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--peak);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 13px;border-radius:20px;margin-bottom:12px}
+.star-crown{position:absolute;top:18px;right:22px;font-size:26px;opacity:.5}.star .card-head{position:relative}
+.star .criteria-icons{gap:9px}
+
+.unavail-row{display:flex;justify-content:space-between;font-size:13px;padding:7px 0;border-bottom:1px solid var(--ice)}
+.unavail-row:last-child{border-bottom:0}
+
+.comments-section{margin-top:60px;border-top:2px solid var(--ice);padding-top:40px}
+.comments-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--peak);margin-bottom:6px}
+.comments-sub{font-size:13px;color:#888;margin-bottom:28px}
+.comment-form{background:#fff;border-radius:14px;padding:24px;box-shadow:0 2px 14px rgba(0,0,0,.06);margin-bottom:32px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:560px){.form-row{grid-template-columns:1fr}}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:0}
+.form-group label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#999}
+.form-group input,.form-group select,.form-group textarea{font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 13px;border:1.5px solid var(--ice);border-radius:8px;outline:none;background:#fafbfd;transition:border-color .2s;color:var(--peak);width:100%}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--glacier)}
+.form-group textarea{resize:vertical;min-height:90px}
+.mb14{margin-bottom:14px}
+.vote-group{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.vote-group label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#999}
+.vote-options{display:flex;gap:8px;flex-wrap:wrap}
+.vote-btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:7px 16px;border-radius:8px;border:1.5px solid var(--ice);background:#fafbfd;cursor:pointer;transition:all .2s;color:#555}
+.vote-btn:hover{border-color:var(--glacier)}
+.vote-btn.sel-go{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:600}
+.vote-btn.sel-wait{border-color:var(--orange);background:var(--orange-bg);color:var(--orange);font-weight:600}
+.vote-btn.sel-no{border-color:var(--red);background:var(--red-bg);color:var(--red);font-weight:600}
+.submit-btn{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;padding:11px 28px;background:linear-gradient(135deg,var(--glacier),var(--alpine));color:#fff;border:none;border-radius:9px;cursor:pointer;margin-top:16px;transition:opacity .2s;width:100%}
+.submit-btn:hover{opacity:.88}.submit-btn:disabled{opacity:.5;cursor:not-allowed}
+.form-msg{font-size:13px;margin-top:10px;padding:10px 14px;border-radius:7px;display:none}
+.form-msg.success{background:var(--green-bg);color:var(--green);display:block}
+.form-msg.error{background:var(--red-bg);color:var(--red);display:block}
+.comments-list{display:flex;flex-direction:column;gap:16px}
+.comment-card{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.comment-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;flex-wrap:wrap;gap:8px}
+.comment-author{font-weight:600;font-size:15px;color:var(--peak)}.comment-family{font-size:12px;color:#aaa;margin-top:1px}
+.comment-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.vote-pill{font-size:11px;font-weight:700;letter-spacing:.5px;padding:3px 10px;border-radius:12px;text-transform:uppercase}
+.vp-go{background:var(--green-bg);color:var(--green)}.vp-wait{background:var(--orange-bg);color:var(--orange)}.vp-no{background:var(--red-bg);color:var(--red)}
+.comment-date{font-size:11px;color:#ccc}
+.comment-pref{font-size:12px;color:var(--glacier);background:var(--ice);padding:3px 10px;border-radius:12px}
+.comment-text{font-size:14px;color:#444;line-height:1.6}
+.comment-stoppers{margin-top:8px;font-size:12px;color:#888}
+.comment-stoppers span{background:var(--red-bg);color:var(--red);padding:2px 8px;border-radius:6px;margin-right:4px;display:inline-block;margin-bottom:3px}
+.no-comments{text-align:center;padding:40px;color:#bbb;font-size:14px}
+.hidden{display:none!important}
+.footer{background:var(--peak);color:rgba(255,255,255,.45);text-align:center;padding:26px 24px;font-size:12px}
+.footer strong{color:rgba(255,255,255,.8)}
+@media(max-width:600px){.hero-stats{gap:22px}.filter-row{display:none}.cards{grid-template-columns:1fr}}
+
+.welcome-block{background:#fff;border-left:4px solid var(--gold);border-radius:0 14px 14px 0;padding:28px 32px;margin:0;box-shadow:0 2px 14px rgba(0,0,0,.06)}
+.welcome-block p{font-size:15px;line-height:1.75;color:#333;margin-bottom:12px}
+.welcome-block p:last-child{margin-bottom:0}
+.welcome-block .w-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--peak);margin-bottom:16px}
+.welcome-block .w-legend{display:flex;flex-direction:column;gap:5px;margin:14px 0;padding:14px 18px;background:var(--snow);border-radius:8px;font-size:14px;color:#444;line-height:1.6}
+.welcome-block .w-qs{margin:14px 0;padding-left:18px}
+.welcome-block .w-qs li{font-size:14px;color:#444;line-height:1.7;list-style:disc}
+.welcome-block .w-sign{font-size:14px;color:#888;font-style:italic;margin-top:4px}
+.welcome-block .w-cta{display:inline-block;background:var(--green);color:#fff;font-size:13px;font-weight:600;padding:8px 18px;border-radius:8px;text-decoration:none;margin-top:12px;cursor:pointer;border:none;font-family:'DM Sans',sans-serif}
+.welcome-block .w-cta:hover{opacity:.88}
+.welcome-wrap{max-width:1100px;margin:0 auto;padding:36px 24px 0}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eyebrow">5 gezinnen &middot; 10 volwassenen &middot; 9 kinderen</div>
+  <h1>Ski Vakantie<br><span>Februari 2027</span></h1>
+  <p class="hero-sub">Locatieoverzicht &mdash; samengesteld door Foeke, Steven &amp; Erik</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">20+</span><span class="stat-lbl">Aangeschreven</span></div>
+    <div class="stat"><span class="stat-num">1</span><span class="stat-lbl">Groene opties</span></div>
+    <div class="stat"><span class="stat-num">6</span><span class="stat-lbl">Oranje opties</span></div>
+    <div class="stat"><span class="stat-num">12+</span><span class="stat-lbl">Rood / niet beschikbaar</span></div>
+  </div>
+</div>
+
+<div class="criteria-bar">
+  <div class="criteria-inner">
+    <span class="criteria-label">Criteria</span>
+    <span class="chip">&#127968; 5 apts in 1 gebouw</span>
+    <span class="chip">&#127859; Eigen keuken</span>
+    <span class="chip">&#128717; 2 slaapkamers</span>
+    <span class="chip">&#9975; Afstand piste</span>
+    <span class="chip">&#127956; Sneeuwzekerheid</span>
+    <span class="chip">&#127935; Dicht bij dorp</span>
+    <span class="chip">&#129398; Wellness &amp; langlauf</span>
+    <span class="chip">&#128182; Betaalbaar</span>
+  </div>
+</div>
+
+<div class="legend-bar">
+  <div class="legend-inner">
+    <span class="legend-title">Status</span>
+    <span class="badge"><span class="dot dot-green"></span> Alle criteria</span>
+    <span class="badge"><span class="dot dot-orange"></span> Kleine afwijking</span>
+    <span class="badge"><span class="dot dot-red"></span> Niet beschikbaar</span>
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="filterCards('all',this)">Alle</button>
+      <button class="filter-btn" onclick="filterCards('green',this)">&#129001; Groen</button>
+      <button class="filter-btn" onclick="filterCards('orange',this)">&#127999; Oranje</button>
+      <button class="filter-btn" onclick="filterCards('red',this)">&#128308; Rood</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="welcome-wrap">
+  <div class="welcome-block">
+    <div class="w-title">Lieve allemaal! &#127935;</div>
+    <p>We hebben de afgelopen week ruim 20 locaties aangeschreven voor onze skivakantie in <strong>februari 2027</strong>. Veel bleek niet meer boekbaar voor 5 gezinnen tegelijk, of voldeed niet aan onze wensen.</p>
+    <p>We hebben een overzicht gemaakt met kleurcodering:</p>
+    <div class="w-legend">
+      <span><span style="display:inline-block;width:14px;height:14px;background:var(--green);border-radius:3px;vertical-align:middle;margin-right:4px"></span> <strong>Groen</strong> &mdash; voldoet aan alle criteria</span>
+      <span><span style="display:inline-block;width:14px;height:14px;background:var(--orange);border-radius:3px;vertical-align:middle;margin-right:4px"></span> <strong>Oranje</strong> &mdash; kleine afwijking of openstaand punt</span>
+      <span><span style="display:inline-block;width:14px;height:14px;background:var(--red);border-radius:3px;vertical-align:middle;margin-right:4px"></span> <strong>Rood</strong> &mdash; niet beschikbaar of voldoet niet</span>
+    </div>
+    <p>Onze criteria zijn: 5 appartementen in 1 gebouw, eigen keuken, 2 slaapkamers, dicht bij piste, goede sneeuwzekerheid (hoogte), dicht bij dorp/gezelligheid, andere activiteiten (wellness, langlauf) en betaalbaar.</p>
+    <p><strong>Er is &eacute;&eacute;n optie die aan &aacute;lle criteria voldoet: Knappensteig in Wagrain.</strong> Scroll door het overzicht hieronder en laat weten wat jullie ervan vinden.</p>
+    <p>We willen graag van ieder gezin weten:</p>
+    <ul class="w-qs">
+      <li>Hoe kijken jullie naar de opties in het overzicht?</li>
+      <li>Wat vinden jullie van Knappensteig specifiek?</li>
+      <li>Hebben jullie zelf nog opties gevonden die we kunnen toevoegen?</li>
+      <li>Wat zijn voor jullie echte no-go&apos;s of showstoppers?</li>
+    </ul>
+    <p>Gezien het uitgebreide wensenpakket en de beperkte beschikbaarheid moeten we snel knopen doorhakken. Kunnen jullie <strong>dit weekend</strong> een eerste reactie in de groep delen met de overeengekomen gezinsmening? Even bellen kan en mag ook altijd!</p>
+    <p>Fijn weekend allemaal! &#127956;</p>
+    <p class="w-sign">Steven, Foeke &amp; Erik</p>
+    <button class="w-cta" onclick="document.getElementById('comments-section').scrollIntoView({behavior:'smooth'})">&#128172; Laat je reactie achter &darr;</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="section-header" data-section="green">
+    <div class="section-dot" style="background:var(--green)"></div>
+    <div class="section-title">Voldoet aan alle criteria</div>
+    <span class="section-count count-green">1 optie</span>
+  </div>
+  <div class="cards" id="cards-green">
+
+    <!-- KNAPPENSTEIG STAR -->
+    <div class="card green star" data-status="green">
+      <div>
+        <div class="card-head">
+          <span class="star-crown">&#127942;</span>
+          <div class="star-pill">&#11088; Sterkste optie</div>
+          <div class="card-location">Wagrain &middot; Oostenrijk</div>
+          <div class="card-name"><a href="https://www.knappensteig.com" target="_blank" rel="noopener">Knappensteig <span class="ext">&#8599;</span></a></div>
+          <div class="card-region">Snow Space Salzburg / Ski Amad&eacute;</div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-body">
+          <div class="card-ski">
+            <span class="ski-tag">&#127956; 838 m dorpshoogte</span>
+            <span class="ski-tag">740&ndash;2.188 m skigebied</span>
+            <span class="ski-tag">212 km / 760 km Ski Amad&eacute;</span>
+          </div>
+          <div class="card-note">Voldoet aan &aacute;lle criteria. Wellness, langlauf, speelkamer voor kinderen. Extra kosten voor flexibele boeking.</div>
+          <div class="card-price">
+            <span class="price-label">Richtprijs</span>
+            <div style="text-align:right">
+              <div class="price-value">&euro; 3.600 &ndash; 3.900 <span class="price-sub">/ week</span></div>
+              <div class="price-sub">4 personen</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card-head" style="padding-top:26px">
+          <div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px">Criteria check</div>
+          <div class="criteria-icons" style="grid-template-columns:1fr 1fr">
+            <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>5 apts / 1 gebouw</div>
+            <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Eigen keuken</div>
+            <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>2 slaapkamers</div>
+            <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Afstand piste</div>
+            <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Sneeuwzekerheid</div>
+            <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Dicht bij dorp</div>
+            <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Wellness &amp; langlauf</div>
+            <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Betaalbaar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALPIUM -->
+    <div class="card orange" data-status="orange">
+      <div class="card-head">
+        <div class="card-location">Flachau &middot; Oostenrijk</div>
+        <div class="card-name"><a href="https://www.alpium.de" target="_blank" rel="noopener">alpium.de <span class="ext">&#8599;</span></a></div>
+        <div class="card-region">Snow Space Salzburg / Ski Amad&eacute;</div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="card-body">
+        <div class="card-ski"><span class="ski-tag">&#127956; 927 m dorpshoogte</span><span class="ski-tag">850&ndash;2.188 m</span><span class="ski-tag">212 / 760 km</span></div>
+        <div class="criteria-icons">
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>5 apts / 1 gebouw</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Eigen keuken</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>2 slaapkamers</div>
+          <div class="crit-item"><span class="crit-icon crit-unk">?</span>Afstand piste</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Sneeuwzekerheid</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Dicht bij dorp</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Wellness &amp; langlauf</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Betaalbaar</div>
+        </div>
+        <div class="card-note">Prijs nog niet bekend. Afstand piste te bevestigen. Zelfde skigebied als Knappensteig.</div>
+        <div class="card-price"><span class="price-label">Richtprijs</span><div class="price-value" style="font-size:14px;color:#aaa">Nog niet bekend</div></div>
+      </div>
+    </div>
+
+    <!-- OBERGURGL -->
+    <div class="card orange" data-status="orange">
+      <div class="card-head">
+        <div class="card-location">Obergurgl &middot; Oostenrijk</div>
+        <div class="card-name">Chalet Obergurgl</div>
+        <div class="card-region">&Ouml;tztal Valley &middot; 350 km piste</div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="card-body">
+        <div class="card-ski"><span class="ski-tag">&#127956; 1.930 m dorpshoogte</span><span class="ski-tag">tot 3.030 m</span><span class="ski-tag">350 km piste</span></div>
+        <div class="criteria-icons">
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>5 apts / 1 gebouw</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Eigen keuken</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>2 slaapkamers</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Afstand piste</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Sneeuwzekerheid</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Dicht bij dorp</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Wellness &amp; langlauf</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Betaalbaar</div>
+        </div>
+        <div class="card-note">Hoogste ligging van alle opties &mdash; beste sneeuwzekerheid. Prijzen eind maart 2026 bekend.</div>
+        <div class="card-price"><span class="price-label">Richtprijs</span><div class="price-value" style="font-size:14px;color:#aaa">Eind maart bekend</div></div>
+      </div>
+    </div>
+
+  </div><!-- /cards-green -->
+
+  <div class="section-header" data-section="orange">
+    <div class="section-dot" style="background:var(--orange)"></div>
+    <div class="section-title">Kleine afwijking of openstaand punt</div>
+    <span class="section-count count-orange">6 opties</span>
+  </div>
+  <div class="cards" id="cards-orange">
+
+    <div class="card orange" data-status="orange">
+      <div class="card-head">
+        <div class="card-location">Haus im Ennstal &middot; Oostenrijk</div>
+        <div class="card-name"><a href="https://www.keinprecht.com/skylodge/en/" target="_blank" rel="noopener">Skylodge <span class="ext">&#8599;</span></a></div>
+        <div class="card-region">4 Berge / Schladming Dachstein</div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="card-body">
+        <div class="card-ski"><span class="ski-tag">&#127956; 754 m</span><span class="ski-tag">745&ndash;2.000 m</span><span class="ski-tag">123 / 230 km</span></div>
+        <div class="criteria-icons">
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>5 apts / 1 gebouw</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Eigen keuken</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>2 slaapkamers</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Afstand piste</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Sneeuwzekerheid</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Dicht bij dorp</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Wellness &amp; langlauf</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Betaalbaar</div>
+        </div>
+        <div class="card-note">Eerder bezocht door &eacute;&eacute;n gezin. Lager skigebied &mdash; iets meer sneeuwrisico dan andere opties.</div>
+        <div class="card-price"><span class="price-label">Richtprijs</span><div style="text-align:right"><div class="price-value">&euro; 3.200 <span class="price-sub">/ week</span></div><div class="price-sub">4 personen</div></div></div>
+      </div>
+    </div>
+
+    <div class="card orange" data-status="orange">
+      <div class="card-head">
+        <div class="card-location">Flachau &middot; Oostenrijk</div>
+        <div class="card-name"><a href="https://www.crystls.at" target="_blank" rel="noopener">Crystls <span class="ext">&#8599;</span></a></div>
+        <div class="card-region">Snow Space Salzburg / Ski Amad&eacute;</div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="card-body">
+        <div class="card-ski"><span class="ski-tag">&#127956; 927 m</span><span class="ski-tag">850&ndash;2.188 m</span><span class="ski-tag">212 / 760 km</span></div>
+        <div class="criteria-icons">
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>5 apts / 1 gebouw</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Eigen keuken</div>
+          <div class="crit-item"><span class="crit-icon crit-no">&#10007;</span>2 slaapkamers</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Afstand piste</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Sneeuwzekerheid</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Dicht bij dorp</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Wellness &amp; langlauf</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Betaalbaar</div>
+        </div>
+        <div class="card-note">Bed in woonkamer (geen echte 2e slaapkamer). Aparte ruimte voor groepsborrel beschikbaar.</div>
+        <div class="card-price"><span class="price-label">Richtprijs</span><div style="text-align:right"><div class="price-value">&euro; 3.395 <span class="price-sub">/ week</span></div><div class="price-sub">4 personen</div></div></div>
+      </div>
+    </div>
+
+    <div class="card orange" data-status="orange">
+      <div class="card-head">
+        <div class="card-location">Flachau &middot; Oostenrijk</div>
+        <div class="card-name"><a href="https://www.harmls-aparthotel.at" target="_blank" rel="noopener">Harmls <span class="ext">&#8599;</span></a></div>
+        <div class="card-region">Snow Space Salzburg / Ski Amad&eacute;</div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="card-body">
+        <div class="card-ski"><span class="ski-tag">&#127956; 927 m</span><span class="ski-tag">850&ndash;2.188 m</span><span class="ski-tag">210 / 760 km</span></div>
+        <div class="criteria-icons">
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>5 apts / 1 gebouw</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Eigen keuken</div>
+          <div class="crit-item"><span class="crit-icon crit-no">&#10007;</span>2 slaapkamers</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Afstand piste</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Sneeuwzekerheid</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Dicht bij dorp</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Wellness &amp; langlauf</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Betaalbaar</div>
+        </div>
+        <div class="card-note">Gedeelde appartementen &mdash; exacte indeling per apt nog te bevestigen. Direct naast de skilift.</div>
+        <div class="card-price"><span class="price-label">Richtprijs</span><div style="text-align:right"><div class="price-value">&euro; 3.241 <span class="price-sub">/ week</span></div><div class="price-sub">4 personen</div></div></div>
+      </div>
+    </div>
+
+    <div class="card orange" data-status="orange">
+      <div class="card-head">
+        <div class="card-location">Hochf&uuml;gen &middot; Zillertal, Oostenrijk</div>
+        <div class="card-name"><a href="https://www.montana.at" target="_blank" rel="noopener">Montana Hochf&uuml;gen <span class="ext">&#8599;</span></a></div>
+        <div class="card-region">Hochf&uuml;gen Zillertal</div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="card-body">
+        <div class="card-ski"><span class="ski-tag">&#127956; 1.500 m</span><span class="ski-tag">1.500&ndash;2.500 m</span><span class="ski-tag">91 km piste</span></div>
+        <div class="criteria-icons">
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>5 apts / 1 gebouw</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Eigen keuken</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>2 slaapkamers</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Afstand piste</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Sneeuwzekerheid</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Dicht bij dorp</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Wellness &amp; langlauf</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Betaalbaar</div>
+        </div>
+        <div class="card-note">Klein skigebied (91 km). Hoge ligging = uitstekende sneeuwzekerheid. Rust en authentiek karakter.</div>
+        <div class="card-price"><span class="price-label">Richtprijs</span><div style="text-align:right"><div class="price-value">&euro; 4.031 <span class="price-sub">/ week</span></div><div class="price-sub">4 personen</div></div></div>
+      </div>
+    </div>
+
+  </div><!-- /cards-orange -->
+
+  <div class="section-header" data-section="red">
+    <div class="section-dot" style="background:var(--red)"></div>
+    <div class="section-title">Niet beschikbaar of voldoet niet</div>
+    <span class="section-count count-red">12 opties</span>
+  </div>
+  <div class="cards" id="cards-red">
+
+    <div class="card red" data-status="red">
+      <div class="card-head"><div class="card-location">Lermoos &middot; Oostenrijk</div><div class="card-name">Larchenhof</div><div class="card-region">Grubigstein / Tiroler Zugspitze</div></div>
+      <div class="card-divider"></div>
+      <div class="card-body">
+        <div class="card-ski"><span class="ski-tag">&#127956; 1.004 m</span><span class="ski-tag">1.000&ndash;2.100 m</span><span class="ski-tag">28 / 144 km</span></div>
+        <div class="criteria-icons">
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>5 apts / 1 gebouw</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Eigen keuken</div>
+          <div class="crit-item"><span class="crit-icon crit-no">&#10007;</span>2 slaapkamers</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Afstand piste</div>
+        </div>
+        <div class="card-note">One bedroom + slaapbank woonkamer. Klein skigebied (28 km lokaal).</div>
+        <div class="card-price"><span class="price-label">Richtprijs</span><div class="price-value">&euro; 3.690 <span class="price-sub">/ week</span></div></div>
+      </div>
+    </div>
+
+    <div class="card red" data-status="red">
+      <div class="card-head"><div class="card-location">Westendorf &middot; Oostenrijk</div><div class="card-name">Chalet 149</div><div class="card-region">SkiWelt Wilder Kaiser Brixental</div></div>
+      <div class="card-divider"></div>
+      <div class="card-body">
+        <div class="card-ski"><span class="ski-tag">620&ndash;1.869 m</span><span class="ski-tag">275 km</span></div>
+        <div class="criteria-icons">
+          <div class="crit-item"><span class="crit-icon crit-no">&#10007;</span>5 apts / 1 gebouw</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Eigen keuken</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>2 slaapkamers</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Afstand piste</div>
+        </div>
+        <div class="card-note">Slechts 4 appartementen (niet 5). Klein skigebied op laagste hoogte.</div>
+        <div class="card-price"><span class="price-label">Richtprijs</span><div class="price-value">&euro; 4.112 <span class="price-sub">/ week</span></div></div>
+      </div>
+    </div>
+
+    <div class="card red" data-status="red">
+      <div class="card-head"><div class="card-location">Mauterndorf &middot; Oostenrijk</div><div class="card-name">AlmApArt</div><div class="card-region">Lungau &middot; 150 km piste</div></div>
+      <div class="card-divider"></div>
+      <div class="card-body">
+        <div class="card-ski"><span class="ski-tag">&#127956; 1.122 m</span><span class="ski-tag">1.100&ndash;2.220 m</span></div>
+        <div class="criteria-icons">
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>5 apts / 1 gebouw</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>Eigen keuken</div>
+          <div class="crit-item"><span class="crit-icon crit-yes">&#10003;</span>2 slaapkamers</div>
+          <div class="crit-item"><span class="crit-icon crit-no">&#10007;</span>Afstand piste</div>
+        </div>
+        <div class="card-note">6 km van de piste. Goedkoopste optie maar onpraktisch qua afstand.</div>
+        <div class="card-price"><span class="price-label">Richtprijs</span><div class="price-value">&euro; 2.500 <span class="price-sub">/ week</span></div></div>
+      </div>
+    </div>
+
+    <div class="card red" data-status="red">
+      <div class="card-head"><div class="card-location">Flachau &middot; Oostenrijk</div><div class="card-name">Dips &amp; Drops</div><div class="card-region">Snow Space Salzburg / Ski Amad&eacute;</div></div>
+      <div class="card-divider"></div>
+      <div class="card-body">
+        <div class="card-ski"><span class="ski-tag">&#127956; 927 m</span><span class="ski-tag">850&ndash;2.188 m</span><span class="ski-tag">212 / 760 km</span></div>
+        <div class="card-note">Voldoet technisch aan alle criteria, maar ruim buiten budget.</div>
+        <div class="card-price"><span class="price-label">Richtprijs</span><div class="price-value" style="color:var(--red)">&euro; 6.000 <span class="price-sub">/ week</span></div></div>
+      </div>
+    </div>
+
+    <div class="card red" data-status="red">
+      <div class="card-head"><div class="card-location">Meerdere locaties</div><div class="card-name">Niet beschikbaar</div><div class="card-region">Fully booked of geen reactie</div></div>
+      <div class="card-divider"></div>
+      <div class="card-body" style="padding-top:12px">
+        <div class="unavail-row"><span>Alpensuites Tirol</span><span style="color:#bbb;font-size:12px">Serfaus &middot; Fully booked</span></div>
+        <div class="unavail-row"><span>Apart Hotel Tyrol</span><span style="color:#bbb;font-size:12px">Lermoos &middot; Not available</span></div>
+        <div class="unavail-row"><span>Landhaus Falkner</span><span style="color:#bbb;font-size:12px">S&ouml;lden &middot; Fully booked</span></div>
+        <div class="unavail-row"><span>panorama-laengenfeld.at</span><span style="color:#bbb;font-size:12px">L&auml;ngenfeld &middot; Fully booked</span></div>
+        <div class="unavail-row"><span>zurbrennhuette.at</span><span style="color:#bbb;font-size:12px">Flachau &middot; Geen 5 apts</span></div>
+        <div class="unavail-row"><span>apart-sonnhof.at</span><span style="color:#bbb;font-size:12px">S&ouml;lden &middot; Fully booked</span></div>
+        <div class="unavail-row"><span>hubertus-ischgl.at</span><span style="color:#bbb;font-size:12px">Ischgl &middot; Geen reactie</span></div>
+      </div>
+    </div>
+
+  </div><!-- /cards-red -->
+
+  <!-- COMMENTS SECTION -->
+  <div class="comments-section" id="comments-section">
+    <div class="comments-title">&#128172; Reacties van de gezinnen</div>
+    <div class="comments-sub">Laat weten wat jullie er van vinden &mdash; we horen graag van ieder gezin v&oacute;&oacute;r volgend weekend.</div>
+
+    <div class="comment-form">
+      <div class="form-row">
+        <div class="form-group"><label>Jouw naam</label><input type="text" id="f-name" placeholder="Bijv. Sarah" maxlength="60"></div>
+        <div class="form-group"><label>Gezin</label>
+          <select id="f-family">
+            <option value="">&#8212; Selecteer gezin &#8212;</option>
+            <option>Familie De Mos/Swinkels</option>
+            <option>Familie Van Krugten/Trossl&eacute;</option>
+            <option>Familie Dijkstra</option>
+            <option>Familie De Koe/Bremer</option>
+            <option>Familie Van de Langemheen/De Gans</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group mb14"><label>Voorkeur locatie</label>
+        <select id="f-pref">
+          <option value="">&#8212; Optioneel &#8212;</option>
+          <option>Knappensteig (Wagrain) &#129001;</option>
+          <option>alpium.de (Flachau) &#129001;</option>
+          <option>Chalet Obergurgl &#129001;</option>
+          <option>Skylodge (Haus im Ennstal) &#127999;</option>
+          <option>Crystls (Flachau) &#127999;</option>
+          <option>Harmls (Flachau) &#127999;</option>
+          <option>Montana Hochf&uuml;gen &#127999;</option>
+          <option>Geen voorkeur / eerst meer info</option>
+        </select>
+      </div>
+      <div class="vote-group"><label>Standpunt Knappensteig</label>
+        <div class="vote-options">
+          <button class="vote-btn" onclick="setVote(this,'go')">&#128077; Wij zijn voor</button>
+          <button class="vote-btn" onclick="setVote(this,'wait')">&#129300; Wil meer info</button>
+          <button class="vote-btn" onclick="setVote(this,'no')">&#128078; Liever niet</button>
+        </div>
+      </div>
+      <div class="form-group mb14"><label>No-go&apos;s / showstoppers voor jullie gezin</label><input type="text" id="f-stoppers" placeholder="Bijv. te ver van dorp, klein skigebied..." maxlength="200"></div>
+      <div class="form-group"><label>Opmerkingen &amp; idee&euml;n</label><textarea id="f-text" placeholder="Eigen gevonden locaties, vragen, prioriteiten..."></textarea></div>
+      <button class="submit-btn" id="submit-btn" onclick="submitComment()">Reactie versturen</button>
+      <div class="form-msg" id="form-msg"></div>
+    </div>
+
+    <div class="comments-list" id="comments-list">
+      <div class="no-comments" id="no-comments">Nog geen reacties &mdash; wees de eerste! &#127935;</div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<div class="footer"><strong>Ski Vakantie Februari 2027</strong> &middot; Samengesteld door Foeke, Steven, Erik &amp; Claude &middot; Prijzen indicatief (4 personen / week, excl. reis &amp; verzekering)</div>
+
+<script>
+const STORAGE_KEY='ski2027-reacties-v3';
+let comments=[];
+let selectedVote='';
+
+window.addEventListener('DOMContentLoaded',async()=>{await loadComments();renderComments()});
+
+async function loadComments(){
+  try{const r=await window.storage.get(STORAGE_KEY,true);comments=r?JSON.parse(r.value):[];}catch(e){comments=[];}
+}
+async function saveComments(){
+  try{await window.storage.set(STORAGE_KEY,JSON.stringify(comments),true);}catch(e){console.error(e);}
+}
+
+function setVote(btn,v){
+  document.querySelectorAll('.vote-btn').forEach(b=>{b.className='vote-btn'});
+  btn.classList.add('sel-'+v);
+  selectedVote=v;
+}
+
+async function submitComment(){
+  const name=document.getElementById('f-name').value.trim();
+  const family=document.getElementById('f-family').value;
+  const pref=document.getElementById('f-pref').value;
+  const text=document.getElementById('f-text').value.trim();
+  const stoppers=document.getElementById('f-stoppers').value.trim();
+  const msg=document.getElementById('form-msg');
+  const btn=document.getElementById('submit-btn');
+  msg.className='form-msg';
+  if(!name||!family){msg.textContent='Vul je naam en gezin in.';msg.className='form-msg error';return;}
+  if(!text&&!selectedVote&&!pref){msg.textContent='Voeg minimaal een standpunt, voorkeur of opmerking toe.';msg.className='form-msg error';return;}
+  btn.disabled=true;btn.textContent='Versturen...';
+  const c={id:Date.now(),name,family,pref,vote:selectedVote,stoppers,text,date:new Date().toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})};
+  comments.unshift(c);
+  await saveComments();
+  renderComments();
+  ['f-name','f-text','f-stoppers'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f-family').value='';
+  document.getElementById('f-pref').value='';
+  document.querySelectorAll('.vote-btn').forEach(b=>b.className='vote-btn');
+  selectedVote='';
+  btn.disabled=false;btn.textContent='Reactie versturen';
+  msg.textContent='Reactie geplaatst - bedankt!';msg.className='form-msg success';
+  setTimeout(()=>{msg.className='form-msg'},4000);
+  document.getElementById('comments-section').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function renderComments(){
+  const list=document.getElementById('comments-list');
+  const empty=document.getElementById('no-comments');
+  list.querySelectorAll('.comment-card').forEach(el=>el.remove());
+  if(!comments.length){empty.style.display='block';return;}
+  empty.style.display='none';
+  const vl={go:'Voor',wait:'Meer info',no:'Liever niet'};
+  const vc={go:'vp-go',wait:'vp-wait',no:'vp-no'};
+  comments.forEach(c=>{
+    const el=document.createElement('div');
+    el.className='comment-card';
+    el.innerHTML=`<div class="comment-header"><div><div class="comment-author">${esc(c.name)}</div><div class="comment-family">${esc(c.family)}</div></div><div class="comment-meta">${c.vote?`<span class="vote-pill ${vc[c.vote]}">${vl[c.vote]}</span>`:''} ${c.pref?`<span class="comment-pref">${esc(c.pref)}</span>`:''}<span class="comment-date">${c.date}</span></div></div>${c.text?`<div class="comment-text">${esc(c.text)}</div>`:''}${c.stoppers?`<div class="comment-stoppers">No-go's: <span>${esc(c.stoppers)}</span></div>`:''}`;
+    list.appendChild(el);
+  });
+}
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+function filterCards(status,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn&&btn.classList.contains('filter-btn'))btn.classList.add('active');
+  ['green','orange','red'].forEach(s=>{
+    const h=document.querySelector(`[data-section="${s}"]`);
+    const g=document.getElementById(`cards-${s}`);
+    const show=status==='all'||status===s;
+    h?.classList.toggle('hidden',!show);
+    g?.classList.toggle('hidden',!show);
+  });
+}
+</script>
+</body>
+</html>
